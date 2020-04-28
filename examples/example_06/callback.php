@@ -25,9 +25,13 @@ try {
     /**
      * Hold information about provider when user clicks on Sign In.
      */
-    if (isset($_GET['provider'])) {
+    if(
+	isset( $_GET['provider'], $_GET['provider_nonce'])
+	&& wp_verify_nonce($_GET['provider_nonce'], 'provider_action')
+    ){
         $storage->set('provider', $_GET['provider']);
     }
+
 
     /**
      * When provider exists in the storage, try to authenticate user and clear storage.
