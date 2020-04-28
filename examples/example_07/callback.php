@@ -20,7 +20,10 @@ try {
     //
     // Event 1: User clicked SIGN-IN link
     //
-    if (isset($_GET['provider'])) {
+    if(
+	isset( $_GET['provider'], $_GET['provider_nonce'])
+	&& wp_verify_nonce($_GET['provider_nonce'], 'provider_action')
+    ) {
         // Validate provider exists in the $config
         if (in_array($_GET['provider'], $hybridauth->getProviders())) {
             // Store the provider for the callback event
