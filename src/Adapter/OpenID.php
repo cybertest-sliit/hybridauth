@@ -85,7 +85,8 @@ abstract class OpenID extends AbstractAdapter implements AdapterInterface
         if(
     	empty($_REQUEST['openid_mode'])
 	    && wp_verify_nonce( $_REQUEST['openid_mode'] , 'openid_mode_action' )
-         {
+         )
+        {
          $this->authenticateBegin();
         } else {
             return $this->authenticateFinish();
