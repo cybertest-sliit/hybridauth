@@ -367,8 +367,8 @@ abstract class OAuth2 extends AbstractAdapter implements AdapterInterface
             [HttpClient\Util::getCurrentUrl(true)]
         );
 
-        $state = filter_input($_SERVER['REQUEST_METHOD'] === 'POST' ? INPUT_POST : INPUT_GET, 'state');
-        $code = filter_input($_SERVER['REQUEST_METHOD'] === 'POST' ? INPUT_POST : INPUT_GET, 'code');
+        $state = filter_input(sanitize_key($_SERVER['REQUEST_METHOD']) === 'POST' ? INPUT_POST : INPUT_GET, 'state');
+        $code = filter_input(sanitize_key($_SERVER['REQUEST_METHOD']) === 'POST' ? INPUT_POST : INPUT_GET, 'code');
 
         /**
         * Authorization Request State
