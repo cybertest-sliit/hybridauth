@@ -27,7 +27,7 @@ try {
      */
     if(
 	isset( $_GET['provider'])
-	&& wp_verify_nonce($_GET['provider'], 'provider_action')
+	&& wp_verify_nonce( sanitize_key($_GET['provider']), 'provider_action')
     ){
         $storage->set('provider', $_GET['provider']);
     }
