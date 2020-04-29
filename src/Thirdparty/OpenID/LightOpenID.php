@@ -103,15 +103,13 @@ class LightOpenID
         $this->returnUrl = $this->trustRoot . $uri;
 
        if (
-
-		isset($_SERVER['REQUEST_METHOD']) &&
-		isset($_SERVER['request_nonce']) &&
-		wp_verify_nonce( sanitize_key( $_SERVER['REQUEST_nonce'] ), 'requestmethod_action'
+        isset($_SERVER['REQUEST_METHOD']) &&
+		wp_verify_nonce( $_SERVER['REQUEST_METHOD'] , 'requestmethod_action'
         ){
-	            $Method = $_SERVER['REQUEST_METHOD']
+	            $ReqMethod = $_SERVER['REQUEST_METHOD']
          }
 
-        $this->data = ($Method === 'POST') ? $_POST : $_GET;
+        $this->data = ($ReqMethod === 'POST') ? $_POST : $_GET;
            
         if (!function_exists('curl_init') && !in_array('https', stream_get_wrappers())) {
             throw new ErrorException('You must have either https wrappers or curl enabled.');
