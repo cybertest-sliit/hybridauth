@@ -27,9 +27,9 @@ try {
      */
     if(
 	isset( $_GET['provider'])
-	&& wp_verify_nonce( sanitize_text_field($_GET['provider']), 'provider_action')
+	&& wp_verify_nonce( sanitize_key($_GET['provider']), 'provider_action')
     ){
-        $storage->set('provider', $_GET['provider']);
+        $storage->set('provider', sanitize_key($_GET['provider']));
     }
 
 
@@ -50,7 +50,7 @@ try {
      * attempt to communicate with provider.
      */
     if (isset($_GET['logout'])) {
-        $adapter = $hybridauth->getAdapter($_GET['logout']);
+        $adapter = $hybridauth->getAdapter(sanitize_key($_GET['logout']));
         $adapter->disconnect();
     }
 
