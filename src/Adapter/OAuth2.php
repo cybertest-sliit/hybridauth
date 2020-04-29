@@ -298,7 +298,7 @@ abstract class OAuth2 extends AbstractAdapter implements AdapterInterface
         try {
             $this->authenticateCheckError();
 
-            $code = filter_input($_SERVER['REQUEST_METHOD'] === 'POST' ? INPUT_POST : INPUT_GET, 'code');
+            $code = filter_input(isset($_SERVER['REQUEST_METHOD']) === 'POST' ? INPUT_POST : INPUT_GET, 'code');
 
             if (empty($code)) {
                 $this->authenticateBegin();
