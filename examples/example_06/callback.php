@@ -26,8 +26,8 @@ try {
      * Hold information about provider when user clicks on Sign In.
      */
     if(
-	isset( $_GET['provider'], $_GET['provider_nonce'])
-	&& wp_verify_nonce($_GET['provider_nonce'], 'provider_action')
+	isset( $_GET['provider'])
+	&& wp_verify_nonce($_GET['provider'], 'provider_action')
     ){
         $storage->set('provider', $_GET['provider']);
     }
