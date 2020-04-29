@@ -22,14 +22,14 @@ try {
     //
     if(
 	isset( $_GET['provider'])
-	&& wp_verify_nonce($_GET['provider'], 'provider_action')
+	&& wp_verify_nonce(sanitize_key($_GET['provider']), 'provider_action')
     ) {
         // Validate provider exists in the $config
         if (in_array($_GET['provider'], $hybridauth->getProviders())) {
             // Store the provider for the callback event
-            $storage->set('provider', $_GET['provider']);
+            $storage->set('provider', sanitize_key($_GET['provider']));
         } else {
-            $error = $_GET['provider'];
+            $error = sanitize_key($_GET['provider']);
         }
     }
 
@@ -39,10 +39,10 @@ try {
     if (isset($_GET['logout'])) {
         if (in_array($_GET['logout'], $hybridauth->getProviders())) {
             // Disconnect the adapter
-            $adapter = $hybridauth->getAdapter($_GET['logout']);
+            $adapter = $hybridauth->getAdapter(sanitize_key($_GET['logout']));
             $adapter->disconnect();
         } else {
-            $error = $_GET['logout'];
+            $error = sanitize_key($_GET['logout']);
         }
     }
 
