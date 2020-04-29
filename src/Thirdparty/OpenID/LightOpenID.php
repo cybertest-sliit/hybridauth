@@ -106,7 +106,7 @@ class LightOpenID
         isset($_SERVER['REQUEST_METHOD']) &&
 		wp_verify_nonce( $_SERVER['REQUEST_METHOD'] , 'requestmethod_action'
         ){
-	            $ReqMethod = $_SERVER['REQUEST_METHOD']
+	            $ReqMethod = $_SERVER['REQUEST_METHOD'];
          }
 
         $this->data = ($ReqMethod === 'POST') ? $_POST : $_GET;
